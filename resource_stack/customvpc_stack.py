@@ -1,6 +1,7 @@
 from aws_cdk import aws_s3
 from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import aws_kms as _kms
+from aws_cdk import aws_s3 as _s3
 from aws_cdk import core
 
 class Customvpc(core.Stack):
@@ -39,4 +40,13 @@ class Customvpc(core.Stack):
              value=Custom_vpc.vpc_id,
             export_name="myvpcout"
         )
+        
+        core.Tag.add(Custom_vpc,"Owner","Sanketh")
+        
+        mybucket=_s3.Bucket(
+            self,
+            "mybuck"
+        )
+        
+        core.Tag.add(mybucket,"Owner","Sanketh")
         
