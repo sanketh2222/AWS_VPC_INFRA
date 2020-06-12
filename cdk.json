@@ -2,6 +2,28 @@
   "app": "python app.py",
   "context": {
     "@aws-cdk/core:enableStackNameDuplicates": "true",
-    "aws-cdk:enableDiffNoFail": "true"
+    "aws-cdk:enableDiffNoFail": "true",
+    "envs":
+    {
+    "dev":
+    {
+      "region":"eu-west-1",
+      "account":"031433565362"
+    },
+    "prod":
+    {
+
+      "region":"us-east-1",
+      "account":"325764798866",
+      "encryption":true,
+      "kms_arn":"arn:aws:kms:us-east-1:325764798866:key/a59f91c2-0af0-4e70-82de-63df35b9615d",
+       "vpc_configs":
+       {
+         "vpc_cidr":"10.0.0.0/20",
+         "mask":28
+       }
+    }
+    }
+    
   }
 }
