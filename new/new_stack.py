@@ -5,7 +5,7 @@ from aws_cdk import aws_kms as _kms
 
 class NewStack(core.Stack):
 
-    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
+    def __init__(self, scope: core.Construct, id: str,is_prod=False, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
 
         # The code that defines your stack goes here
@@ -18,14 +18,9 @@ class NewStack(core.Stack):
             self.node.try_get_context('prod')['kms_arn']
         )
         
-        
-        
-        vpc_id=self.node.try_get_context('envs')['prod']
-        mask=vpc_id['vpc_configs']['mask']
-        
-        print(mask)
+    
         print(kms_key)
-        print()
+       
         
         if is_prod:
             artifact=aws_s3.Bucket(
