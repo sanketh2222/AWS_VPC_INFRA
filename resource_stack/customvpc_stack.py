@@ -63,3 +63,10 @@ class Customvpc(core.Stack):
             value=vpc_id2.vpc_id
         )
         
+        peervpc=_ec2.CfnVPCPeeringConnection(
+            self,
+            "vpcpeer",
+            vpc_id=Custom_vpc.vpc_id,
+            peer_vpc_id=vpc_id2.vpc_id
+        )
+        
