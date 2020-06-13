@@ -50,3 +50,16 @@ class Customvpc(core.Stack):
         
         core.Tag.add(mybucket,"Owner","Sanketh")
         
+        vpc_id2=_ec2.Vpc.from_lookup(
+            self,
+            "myvpc2",
+            vpc_id="vpc-e2aab998"
+        
+        )
+        
+        core.CfnOutput(
+            self,
+            "vpc2id",
+            value=vpc_id2.vpc_id
+        )
+        
