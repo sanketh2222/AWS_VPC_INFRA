@@ -22,6 +22,10 @@
        {
          "vpc_cidr":"10.0.0.0/20",
          "mask":28
+       },
+       "ec2_configs":
+       {
+         "image":"ami-09d95fab7fff3776c"
        }
     }
     }
