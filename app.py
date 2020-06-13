@@ -11,6 +11,10 @@ from resource_stack.customvpc_stack import Customvpc
 
 app = core.App()
 
+print(app.node.try_get_context('envs')['prod']['mail'])
+
+core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])
+
 #env_US=core.Environment(account=app.node.try_get_context('prod')['account'],region=app.node.try_get_context('prod')['region'])
 #env_Europe=core.Environment(account=app.node.try_get_context('dev')['account'],region=app.node.try_get_context('dev')['region'])
 

@@ -14,6 +14,7 @@
     {
 
       "region":"us-east-1",
+      "mail":"sanketh@gmail.com",
       "account":"325764798866",
       "encryption":true,
       "kms_arn":"arn:aws:kms:us-east-1:325764798866:key/a59f91c2-0af0-4e70-82de-63df35b9615d",
