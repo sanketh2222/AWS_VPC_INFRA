@@ -34,7 +34,7 @@ env_US=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 #print(app.node.try_get_context('@aws-cdk/core:enableStackNameDuplicates'))
 
 #VPC Stack
-Customvpc(app, "myvpcstack",env=env_US)  
+# Customvpc(app, "myvpcstack",env=env_US)  
 
 
 #EC2 Stack

@@ -1,4 +1,3 @@
-from aws_cdk import aws_s3
 from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import aws_kms as _kms
 from aws_cdk import aws_s3 as _s3
@@ -32,7 +31,7 @@ class Customvpc(core.Stack):
         )
         
         
-        print(mask)
+        # print(mask)
         
         core.CfnOutput(
             self,
