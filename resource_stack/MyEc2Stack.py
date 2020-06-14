@@ -94,6 +94,24 @@ class MyEc2Stack(core.Stack):
             _ec2.Port.tcp(80), description="Opening port 80 Traffic for webserver02"
         )
         
-        
+        webserver2.instance.add_property_override(
+            "BlockDeviceMappings",
+            [
+                {
+                    "DeviceName" : "/dev/sda1",
+                    "Ebs":{
+                        "VolumeSize" : "8",
+                        "VolumeType" : "io1",
+                        "Iops": "100",
+                        "DeleteOnTermination": True
+                    }
+                        
+                }
+                
+                 
+                 
+                
+            ]
+        )
         
         

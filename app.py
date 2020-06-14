@@ -36,7 +36,7 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 MyEc2Stack(app,"MyEc2Stack",env=env_US) 
 
 #EC2 Stack2
-MyEc2Stack(app,"MyOhioStack",env=env_oh)
+#MyEc2Stack(app,"MyOhioStack",env=env_oh)
 
 
 
