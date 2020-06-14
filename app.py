@@ -11,22 +11,17 @@ from resource_stack.MyEc2Stack import MyEc2Stack
 
 
 
-
-
-
-
-
-
-
-
 app = core.App()
 
-print(app.node.try_get_context('envs')['prod']['mail'])
+print(app.node.try_get_context('envs')['prod']['ohio'])
 
 core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])
 
 env_US=core.Environment(account=app.node.try_get_context('envs')['prod']['account'],
                         region=app.node.try_get_context('envs')['prod']['region'])
+
+env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['account'],
+                        region=app.node.try_get_context('envs')['prod']['ohio'])
 #env_Europe=core.Environment(account=app.node.try_get_context('dev')['account'],region=app.node.try_get_context('dev')['region'])
 
 #print(app.node.try_get_context('dev')['region'])
@@ -37,8 +32,11 @@ env_US=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 # Customvpc(app, "myvpcstack",env=env_US)  
 
 
-#EC2 Stack
-MyEc2Stack(app,"MyEc2Stack",env=env_US)
+#EC2 Stack 1
+MyEc2Stack(app,"MyEc2Stack",env=env_US) 
+
+#EC2 Stack2
+MyEc2Stack(app,"MyOhioStack",env=env_oh)
 
 
 
