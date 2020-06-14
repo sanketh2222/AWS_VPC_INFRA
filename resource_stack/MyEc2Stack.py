@@ -1,5 +1,7 @@
 from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import core
+from aws_cdk import aws_iam as _iam
+from aws_cdk import aws_s3 as _s3
 
 class MyEc2Stack(core.Stack):
 
@@ -10,7 +12,7 @@ class MyEc2Stack(core.Stack):
         # reading the bootstrap file
         with open("Bootstrap_scripts/install_httpd.sh") as f:
             user_data=f.read()
-            print(user_data)
+            #print(user_data)
         
         myvpc=_ec2.Vpc.from_lookup(
             self,
@@ -23,9 +25,12 @@ class MyEc2Stack(core.Stack):
         # print(prod_configs['ec2_configs']['image'])
         # print(prod_configs['region'])
         
-        webserver1=_ec2.Instance(
+        
+        
+        
+        webserver2=_ec2.Instance(
             self,
-            "Webserver1",
+            "webserver2",
             instance_type=_ec2.InstanceType(instance_type_identifier="t2.micro"),
             instance_name="WebServer02",
             machine_image=_ec2.MachineImage.generic_linux(
@@ -45,9 +50,23 @@ class MyEc2Stack(core.Stack):
         core.CfnOutput(
             self,
             "ec2out",
-            value=webserver1.instance_id
+            value=webserver2.instance_id
         )
         
+        webserver2.role.add_managed_policy(
+            _iam.ManagedPolicy.from_aws_managed_policy_name(
+                "AmazonSSMManagedInstanceCore"
+            )
+        )
+        
+    
+        
+        
+        webserver2.role.add_managed_policy(
+            _iam.ManagedPolicy.from_aws_managed_policy_name(
+                "AmazonS3ReadOnlyAccess"
+            )
+        )
         
         
         # outputs IP address of webserver
@@ -55,14 +74,14 @@ class MyEc2Stack(core.Stack):
         core.CfnOutput(
             self,
             "webserverip",
-            value=f"http://{webserver1.instance_public_ip}",
-            description=" IP address of Webserver01"
+            value=f"http://{webserver2.instance_public_ip}",
+            description=" IP address of Webserver02"
         )
         
         # open traffic at port 80
         
-        webserver1.connections.allow_from_any_ipv4(
-            _ec2.Port.tcp(80), description="Opening port 80 Traffic for webserver01"
+        webserver2.connections.allow_from_any_ipv4(
+            _ec2.Port.tcp(80), description="Opening port 80 Traffic for webserver02"
         )
         
         
