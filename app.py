@@ -2,11 +2,15 @@
 
 from aws_cdk import core
 
+
 #from new.new_stack import NewStack
 
 from resource_stack.customvpc_stack import Customvpc
 
 from resource_stack.MyEc2Stack import MyEc2Stack
+
+from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
+
 
 
 
@@ -29,14 +33,19 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 #print(app.node.try_get_context('@aws-cdk/core:enableStackNameDuplicates'))
 
 #VPC Stack
-# Customvpc(app, "myvpcstack",env=env_US)  
+ 
+#Customvpc(app,"myvpcstack",env=env_US)  
+
+ 
 
 
 #EC2 Stack 1
-MyEc2Stack(app,"MyEc2Stack",env=env_US) 
+#MyEc2Stack(app,"MyEc2Stack",env=env_US) 
 
 #EC2 Stack2
 #MyEc2Stack(app,"MyOhioStack",env=env_oh)
+
+MyEc2AsgStack(app,"MyASGStack",env=env_US)
 
 
 

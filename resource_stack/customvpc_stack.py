@@ -49,19 +49,24 @@ class Customvpc(core.Stack):
         
         core.Tag.add(mybucket,"Owner","Sanketh")
         
+        
+        '''
         vpc_id2=_ec2.Vpc.from_lookup(
             self,
             "myvpc2",
             vpc_id="vpc-e2aab998"
-        
         )
+        '''
         
+        '''
         core.CfnOutput(
             self,
             "vpc2id",
             value=vpc_id2.vpc_id
         )
+        '''
         
+        '''
         peervpc=_ec2.CfnVPCPeeringConnection(
             self,
             "vpcpeer",
@@ -69,3 +74,4 @@ class Customvpc(core.Stack):
             peer_vpc_id=vpc_id2.vpc_id  #acceptor vpc id (default vpc)
         )
         
+        '''

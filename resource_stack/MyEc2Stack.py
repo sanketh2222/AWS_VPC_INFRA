@@ -2,6 +2,9 @@ from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import core
 from aws_cdk import aws_iam as _iam
 from aws_cdk import aws_s3 as _s3
+from aws_cdk import aws_autoscaling as _au 
+from aws_cdk import  aws_elasticloadbalancingv2 as _alb
+
 
 class MyEc2Stack(core.Stack):
 
@@ -9,12 +12,12 @@ class MyEc2Stack(core.Stack):
         super().__init__(scope, id, **kwargs)
         
         
+        
         # reading the bootstrap file
         with open("Bootstrap_scripts/install_httpd.sh") as f:
             user_data=f.read()
             #print(user_data)
-            
-            
+    
         
         # getting the latest AMI id
         
@@ -61,7 +64,7 @@ class MyEc2Stack(core.Stack):
         )
         
         
-        #additional policy (insatnce profile) to ec2 instances
+        #additional policy (instance profile) to ec2 instances
         
         webserver2.role.add_managed_policy(
             _iam.ManagedPolicy.from_aws_managed_policy_name(
