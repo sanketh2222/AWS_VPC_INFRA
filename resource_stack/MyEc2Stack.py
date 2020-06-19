@@ -57,6 +57,19 @@ class MyEc2Stack(core.Stack):
             user_data=_ec2.UserData.custom(user_data)
         )
         
+        buck=_s3.Bucket.from_bucket_name(
+            self,
+            "mybuck",
+            bucket_name="mybucket2808"
+        )
+        
+        core.CfnOutput(
+            self,
+            "myimportbuck",
+            value=buck.bucket_name,
+            export_name="imported"
+        )
+        
         core.CfnOutput(
             self,
             "ec2out",

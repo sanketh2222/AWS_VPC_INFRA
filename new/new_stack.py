@@ -20,7 +20,6 @@ class NewStack(core.Stack):
         
     
         print(kms_key)
-       g
         
         if is_prod:
             artifact=aws_s3.Bucket(
@@ -28,6 +27,7 @@ class NewStack(core.Stack):
                 "Myprodbuck",
                  block_public_access=aws_s3.BlockPublicAccess.BLOCK_ALL,
                  encryption=aws_s3.BucketEncryption.KMS,
+                 public_read_access=True,
                  encryption_key=kms_key,
                  removal_policy=core.RemovalPolicy.RETAIN
             )
@@ -38,5 +38,5 @@ class NewStack(core.Stack):
                 "pdid"
              )
 
-            
+        
 

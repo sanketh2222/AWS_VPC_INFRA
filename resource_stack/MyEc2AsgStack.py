@@ -32,7 +32,15 @@ class MyEc2AsgStack(core.Stack):
         myvpc=_ec2.Vpc.from_lookup(
             self,
             "mydefvpc",
-            vpc_id="vpc-0e958927aa8e42c40"
+            is_default=True
+        )
+        
+        pvtsubnet=_ec2.PrivateSubnet(
+            self,
+            "pvtsubnet",
+            availability_zone="us-east-1a",
+            cidr_block="172.31.99.0/28",
+            vpc_id="vpc-e2aab998"
         )
         
        
@@ -76,9 +84,7 @@ class MyEc2AsgStack(core.Stack):
             self,
             "MyASG",
             vpc=myvpc,
-            vpc_subnets=_ec2.SubnetSelection(
-                subnet_type=_ec2.SubnetType.PRIVATE
-            ),
+            vpc_subnets=pvtsubnet,
             instance_type=_ec2.InstanceType(instance_type_identifier="t2.micro"),
             machine_image=linux_image,
             min_capacity=2,
