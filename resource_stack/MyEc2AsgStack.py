@@ -36,13 +36,11 @@ class MyEc2AsgStack(core.Stack):
             is_default=True
         )
         
-        # create a private subnet in the existing VPC
-        pvtsubnet=_ec2.PrivateSubnet(
+        # import existin subnet to our stack
+        pvtsubnet=_ec2.Subnet.from_subnet_id(
             self,
-            "pvtsubnet",
-            availability_zone="us-east-1a",
-            cidr_block="172.31.99.0/28",
-            vpc_id="vpc-e2aab998"
+            "mypvtsubnet",
+            subnet_id="subnet-0c85f0ab8ea21cc93"
         )
         
        
@@ -82,7 +80,7 @@ class MyEc2AsgStack(core.Stack):
             ]
         )
         
-        
+       
         web_Server_asg=_au.AutoScalingGroup(
             self,
             "MyASG",
