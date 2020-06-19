@@ -29,12 +29,14 @@ class MyEc2AsgStack(core.Stack):
             virtualization=_ec2.AmazonLinuxVirt.HVM
         )
         
+        # Import existing vpc
         myvpc=_ec2.Vpc.from_lookup(
             self,
             "mydefvpc",
             is_default=True
         )
         
+        # create a private subnet in the existing VPC
         pvtsubnet=_ec2.PrivateSubnet(
             self,
             "pvtsubnet",
@@ -44,6 +46,7 @@ class MyEc2AsgStack(core.Stack):
         )
         
        
+       #creating an application load balancer
         alb=_elb.ApplicationLoadBalancer(
             self,
             "MyLoadBalancer",
