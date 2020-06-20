@@ -36,7 +36,7 @@ class MyEc2AsgStack(core.Stack):
             is_default=True
         )
         
-        # import existin subnet to our stack
+        # import existing subnet to our stack
         pvtsubnet=_ec2.Subnet.from_subnet_id(
             self,
             "mypvtsubnet",

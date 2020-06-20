@@ -11,6 +11,8 @@ from resource_stack.MyEc2Stack import MyEc2Stack
 
 from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
 
+from   resource_stack.SecretStack import  MySecretStack
+
 
 
 
@@ -45,11 +47,12 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 #EC2 Stack2
 #MyEc2Stack(app,"MyOhioStack",env=env_oh)
 
-MyEc2AsgStack(app,"MyASGStack",env=env_US)
+#autoscalling stacks
+#MyEc2AsgStack(app,"MyASGStack",env=env_US)
 
 
-
-
+#secrets and ssm
+MySecretStack(app,"SecreteStack")
 #NewStack(app, "mydevstack1",env=env_US)
 
 #NewStack(app,"myprodstack1",is_prod=True,env=env_US)
