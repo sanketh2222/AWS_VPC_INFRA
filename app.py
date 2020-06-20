@@ -13,13 +13,15 @@ from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
 
 from   resource_stack.SecretStack import  MySecretStack
 
+from resource_stack.iamStack import  MyIAMStack
+
 
 
 
 
 app = core.App()
 
-print(app.node.try_get_context('envs')['prod']['ohio'])
+#print(app.node.try_get_context('envs')['prod']['ohio'])
 
 core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])
 
@@ -44,16 +46,28 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 #EC2 Stack 1
 #MyEc2Stack(app,"MyEc2Stack",env=env_US) 
 
+
+
 #EC2 Stack2
 #MyEc2Stack(app,"MyOhioStack",env=env_oh)
+
+
 
 #autoscalling stacks
 #MyEc2AsgStack(app,"MyASGStack",env=env_US)
 
 
 #secrets and ssm
-MySecretStack(app,"SecreteStack")
+#MySecretStack(app,"SecreteStack")
+
+
+#IAM Stack
+MyIAMStack(app,"IAMStack")
+
+
+
 #NewStack(app, "mydevstack1",env=env_US)
+
 
 #NewStack(app,"myprodstack1",is_prod=True,env=env_US)
 
