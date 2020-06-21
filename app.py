@@ -5,15 +5,18 @@ from aws_cdk import core
 
 #from new.new_stack import NewStack
 
-from resource_stack.customvpc_stack import Customvpc
+#from resource_stack.customvpc_stack import Customvpc
 
-from resource_stack.MyEc2Stack import MyEc2Stack
+#from resource_stack.MyEc2Stack import MyEc2Stack
 
-from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
+#from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
 
-from   resource_stack.SecretStack import  MySecretStack
+#from   resource_stack.SecretStack import  MySecretStack
 
 from resource_stack.iamStack import  MyIAMStack
+
+from resource_stack.resourcePolicies import ResourceStack
+
 
 
 
@@ -62,7 +65,11 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 
 #IAM Stack
-MyIAMStack(app,"IAMStack")
+#MyIAMStack(app,"IAMStack")
+
+
+#Resource Stack
+ResourceStack(app,"ResStack")
 
 
 
