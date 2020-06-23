@@ -17,6 +17,8 @@ from resource_stack.iamStack import  MyIAMStack
 
 from resource_stack.resourcePolicies import ResourceStack
 
+from resource_stack.CustomS3ResPolicy import S3CustomResourceStack
+
 
 
 
@@ -71,7 +73,8 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 #Resource Stack
 ResourceStack(app,"ResStack")
 
-
+# S3 Resource stack
+S3CustomResourceStack(app,"S3ResStack")
 
 #NewStack(app, "mydevstack1",env=env_US)
 
