@@ -6,10 +6,14 @@ from aws_cdk import core
 #from new.new_stack import NewStack
 
 #from resource_stack.customvpc_stack import Customvpc
+from app_db_stack.appStack import  MyEc2AsgStack
 
 #from resource_stack.MyEc2Stack import MyEc2Stack
 
 #from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
+from  app_db_stack.Vpcstack import  Customvpc
+
+from app_db_stack.appDBStack import RdsStack
 
 #from   resource_stack.SecretStack import  MySecretStack
 
@@ -39,11 +43,11 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 #print(app.node.try_get_context('dev')['region'])
 
-#print(app.node.try_get_context('@aws-cdk/core:enableStackNameDuplicates'))
+#print(app.node.try_get_context('@aws_cdk/core:enableStackNameDuplicates'))
 
 #VPC Stack
  
-#Customvpc(app,"myvpcstack",env=env_US)  
+vpcstack=Customvpc(app,"myvpcstack")  
 
  
 
@@ -59,7 +63,11 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 
 #autoscalling stacks
-#MyEc2AsgStack(app,"MyASGStack",env=env_US)
+ec2stack=MyEc2AsgStack(app,"MyASGStack",vpcstack.vpc)
+
+
+#rds stack
+RdsStack(app,"RDSStack",vpc=vpcstack.vpc,securitygroups=ec2stack.web_Server_asg.connections.security_groups)
 
 
 #secrets and ssm
@@ -71,10 +79,10 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 
 #Resource Stack
-ResourceStack(app,"ResStack")
+#ResourceStack(app,"ResStack")
 
 # S3 Resource stack
-S3CustomResourceStack(app,"S3ResStack")
+#S3CustomResourceStack(app,"S3ResStack")
 
 #NewStack(app, "mydevstack1",env=env_US)
 
