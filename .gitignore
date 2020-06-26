@@ -4,9 +4,7 @@ __pycache__
 .pytest_cache
 .env
 *.egg-info
-app_db_stack/
-cfn_stacks/sample_templates/
-CfnPreImfort.py
+
 
 
 # CDK asset staging directory
