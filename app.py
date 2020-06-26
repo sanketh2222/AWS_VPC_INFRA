@@ -15,6 +15,7 @@ from  app_db_stack.Vpcstack import  Customvpc
 
 from app_db_stack.appDBStack import RdsStack
 
+from cfn_stacks.CfnPreImfort import CfnStack
 #from   resource_stack.SecretStack import  MySecretStack
 
 from resource_stack.iamStack import  MyIAMStack
@@ -47,10 +48,10 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 #VPC Stack
  
-vpcstack=Customvpc(app,"myvpcstack")  
+#vpcstack=Customvpc(app,"myvpcstack")  
 
  
-
+CfnStack(app,"CfnStack")
 
 #EC2 Stack 1
 #MyEc2Stack(app,"MyEc2Stack",env=env_US) 
@@ -63,11 +64,11 @@ vpcstack=Customvpc(app,"myvpcstack")
 
 
 #autoscalling stacks
-ec2stack=MyEc2AsgStack(app,"MyASGStack",vpcstack.vpc)
+#ec2stack=MyEc2AsgStack(app,"MyASGStack",vpcstack.vpc)
 
 
 #rds stack
-RdsStack(app,"RDSStack",vpc=vpcstack.vpc,securitygroups=ec2stack.web_Server_asg.connections.security_groups)
+#RdsStack(app,"RDSStack",vpc=vpcstack.vpc,securitygroups=ec2stack.web_Server_asg.connections.security_groups)
 
 
 #secrets and ssm
