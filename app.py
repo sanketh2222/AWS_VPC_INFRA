@@ -26,6 +26,8 @@ from resource_stack.CustomS3ResPolicy import S3CustomResourceStack
 
 from cfn_stacks.snssubStack import SnsSubStack
 
+from cfn_stacks.sqsStack import SQSStack
+
 
 
 
@@ -56,6 +58,12 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
  
 CfnStack(app,"CfnStack")
+
+#sqs stack
+SQSStack(app,"SQSStack")
+
+
+
 
 #EC2 Stack 1
 #MyEc2Stack(app,"MyEc2Stack",env=env_US) 

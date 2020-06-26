@@ -2,6 +2,7 @@ from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import aws_rds as _rds
 from aws_cdk import core
 from aws_cdk import aws_sns as _sns
+from  aws_cdk import aws_sqs as _sqs
 from aws_cdk import aws_sns_subscriptions as _sub
 import json
 
