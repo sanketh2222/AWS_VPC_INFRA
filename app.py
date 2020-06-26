@@ -16,13 +16,15 @@ from  app_db_stack.Vpcstack import  Customvpc
 from app_db_stack.appDBStack import RdsStack
 
 from cfn_stacks.CfnPreImfort import CfnStack
-#from   resource_stack.SecretStack import  MySecretStack
+from   resource_stack.SecretStack import  MySecretStack
 
 from resource_stack.iamStack import  MyIAMStack
 
 from resource_stack.resourcePolicies import ResourceStack
 
 from resource_stack.CustomS3ResPolicy import S3CustomResourceStack
+
+from cfn_stacks.snssubStack import SnsSubStack
 
 
 
@@ -31,6 +33,8 @@ from resource_stack.CustomS3ResPolicy import S3CustomResourceStack
 
 app = core.App()
 
+
+SnsSubStack(app,"SnsSubStack")
 #print(app.node.try_get_context('envs')['prod']['ohio'])
 
 core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])
@@ -72,7 +76,7 @@ CfnStack(app,"CfnStack")
 
 
 #secrets and ssm
-#MySecretStack(app,"SecreteStack")
+MySecretStack(app,"SecreteStack")
 
 
 #IAM Stack
