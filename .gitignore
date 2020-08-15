@@ -6,6 +6,7 @@ __pycache__
 *.egg-info
 /node_modules
 *.pckl
+New folder/
 
 
 # CDK asset staging directory

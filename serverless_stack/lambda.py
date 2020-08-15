@@ -2,7 +2,7 @@ import json
 import logging
 import os
 
-
+#from s3 bucket
 def lambda_handler(event, context):
     global LOGGER_VAR
     LOGGER_VAR = logging.getLogger()
