@@ -13,7 +13,7 @@ from app_db_stack.appStack import  MyEc2AsgStack
 #from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
 from  app_db_stack.Vpcstack import  Customvpc
 
-from app_db_stack.appDBStack import RdsStack
+# from app_db_stack.appDBStack import RdsStack
 
 from cfn_stacks.CfnPreImfort import CfnStack
 
@@ -31,17 +31,16 @@ from cfn_stacks.sqsStack import SQSStack
 
 from serverless_stack.lambda_stack import MyLambdaStack
 
-
-
-
+from serverless_stack.LambdaStackAsCron import MyLambdaAsCronStack
 
 
 app = core.App()
 
 MyLambdaStack(app,"LambdaStack")
 
+MyLambdaAsCronStack(app,"Lambdacronstack")
 
-SnsSubStack(app,"SnsSubStack")
+# SnsSubStack(app,"SnsSubStack")
 #print(app.node.try_get_context('envs')['prod']['ohio'])
 
 core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])

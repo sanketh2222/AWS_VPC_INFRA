@@ -10,3 +10,5 @@ aws-cdk.aws_rds
 aws-cdk.aws_sns_subscriptions
 aws-cdk.aws_sqs
 aws_cdk.aws_lambda
+aws_cdk.aws_logs
+aws_cdk.aws_events_targets
