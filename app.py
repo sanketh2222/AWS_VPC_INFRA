@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
+# from aws_cdk import core
 from aws_cdk import core
-
 
 #from new.new_stack import NewStack
 
@@ -16,6 +16,7 @@ from  app_db_stack.Vpcstack import  Customvpc
 from app_db_stack.appDBStack import RdsStack
 
 from cfn_stacks.CfnPreImfort import CfnStack
+
 from   resource_stack.SecretStack import  MySecretStack
 
 from resource_stack.iamStack import  MyIAMStack
@@ -28,12 +29,16 @@ from cfn_stacks.snssubStack import SnsSubStack
 
 from cfn_stacks.sqsStack import SQSStack
 
+from serverless_stack.lambda_stack import MyLambdaStack
+
 
 
 
 
 
 app = core.App()
+
+MyLambdaStack(app,"LambdaStack")
 
 
 SnsSubStack(app,"SnsSubStack")
@@ -60,7 +65,7 @@ env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 CfnStack(app,"CfnStack")
 
 #sqs stack
-SQSStack(app,"SQSStack")
+#SQSStack(app,"SQSStack")
 
 
 
@@ -84,7 +89,7 @@ SQSStack(app,"SQSStack")
 
 
 #secrets and ssm
-MySecretStack(app,"SecreteStack")
+#MySecretStack(app,"SecreteStack")
 
 
 #IAM Stack

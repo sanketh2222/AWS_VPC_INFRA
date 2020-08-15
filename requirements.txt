@@ -9,3 +9,4 @@ aws-cdk.aws_secretsmanager
 aws-cdk.aws_rds
 aws-cdk.aws_sns_subscriptions
 aws-cdk.aws_sqs
+aws_cdk.aws_lambda

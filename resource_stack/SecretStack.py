@@ -1,6 +1,7 @@
 from aws_cdk import aws_secretsmanager as  _secretmanager
 from aws_cdk import aws_ssm as _ssm
 from aws_cdk import core
+import pickle
 import json
 
 
@@ -22,11 +23,33 @@ class MySecretStack(core.Stack):
         
         secret=_secretmanager.Secret(
             self,
-            "mysecret",
+            "mysecret", 
             description="storing db pass",
             secret_name="secretpass"
             
         )
+        template={"username":"JonDoe",
+                     "user2":"Cena"}
+        
+        
+        #Serialize
+        try:
+            with open(file="tmplte.pckl",mode="wb") as file:
+                tmpl=pickle.dump(template,file)
+        except OSError:
+            print("could not create file")
+            
+            
+        ifile=open(file="tmplte.pckl",mode="rb") 
+        tmlate=pickle.load(ifile)  
+        
+        print(tmlate)    
+          
+        
+        
+        
+        
+        print(template)
         
         templete_output=_secretmanager.Secret(
             self,
@@ -34,10 +57,8 @@ class MySecretStack(core.Stack):
             description="json dumps to store credentials",
             secret_name="json_secret_store",
             generate_secret_string=_secretmanager.SecretStringGenerator(
-                secret_string_template=json.dumps(
-                    {"username":"JonDoe",
-                     "user2":"Cena"}
-                ),
+                secret_string_template=json.dumps({"username":"JonDoe",
+                     "user2":"Cena"}),
                 generate_string_key="password"
             )
         )
