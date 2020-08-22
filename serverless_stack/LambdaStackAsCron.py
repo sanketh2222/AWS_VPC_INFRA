@@ -28,7 +28,7 @@ class MyLambdaAsCronStack(core.Stack):
                 bucket=s3bkt,
                 key="lambda.zip"
             ),
-            handler="index.lambda_handler",
+            handler="lambda.lambda_handler",
             runtime=_lambda.Runtime.PYTHON_3_7,
             environment={
                     "var":"1",# not able to set integer values
