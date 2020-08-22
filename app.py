@@ -8,7 +8,7 @@ from aws_cdk import core
 #from resource_stack.customvpc_stack import Customvpc
 from app_db_stack.appStack import  MyEc2AsgStack
 
-from resource_stack.MyEc2Stack import MyEc2Stack
+#from resource_stack.MyEc2Stack import MyEc2Stack
 
 #from  resource_stack.MyEc2AsgStack import MyEc2AsgStack
 from  app_db_stack.Vpcstack import  Customvpc
@@ -33,23 +33,15 @@ from serverless_stack.lambda_stack import MyLambdaStack
 
 from serverless_stack.LambdaStackAsCron import MyLambdaAsCronStack
 
-from serverless_stack.DynamodbStack import MyDynamoStack
-
-from serverless_stack.DynamodbcodeStack import DynamodbcodeStack
-
-from serverless_stack.ApiGatewayStack import ApiGatewayStack
-
-from serverless_stack.MonitoringStack import MonitoringStack
-
-from serverless_stack.LogGenStack import LogGenStack
-
-from serverless_stack.LiveDashboardStack import LiveDashboardStack
-
-
-
-
 
 app = core.App()
+
+MyLambdaStack(app,"LambdaStack")
+
+MyLambdaAsCronStack(app,"Lambdacronstack")
+
+# SnsSubStack(app,"SnsSubStack")
+#print(app.node.try_get_context('envs')['prod']['ohio'])
 
 core.Tag.add(app,key="OwnerMail",value=app.node.try_get_context('envs')['prod']['mail'])
 
@@ -58,30 +50,6 @@ env_US=core.Environment(account=app.node.try_get_context('envs')['prod']['accoun
 
 env_oh=core.Environment(account=app.node.try_get_context('envs')['prod']['account'],
                         region=app.node.try_get_context('envs')['prod']['ohio'])
-
-# MyLambdaStack(app,"LambdaStack")
-
-# MyLambdaAsCronStack(app,"Lambdacronstack")
-
-# MyDynamoStack(app,"dynamo")
-
-# DynamodbcodeStack(app,"dbcodestack")
-
-# ApiGatewayStack(app,"apigwystack")
-
-MonitoringStack(app,"ms",env=env_US)
-
-# LogGenStack(app,"LogGenStack")
-
-LiveDashboardStack(app,"LiveDash")
-
-#EC2 Stack 1
-#MyEc2Stack(app,"MyEc2Stack",env=env_US) 
-
-# SnsSubStack(app,"SnsSubStack")
-#print(app.node.try_get_context('envs')['prod']['ohio'])
-
-
 #env_Europe=core.Environment(account=app.node.try_get_context('dev')['account'],region=app.node.try_get_context('dev')['region'])
 
 #print(app.node.try_get_context('dev')['region'])
@@ -93,7 +61,7 @@ LiveDashboardStack(app,"LiveDash")
 #vpcstack=Customvpc(app,"myvpcstack")  
 
  
-# CfnStack(app,"CfnStack")
+CfnStack(app,"CfnStack")
 
 #sqs stack
 #SQSStack(app,"SQSStack")
